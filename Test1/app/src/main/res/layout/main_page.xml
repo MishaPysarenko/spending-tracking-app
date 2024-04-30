@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/MainPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="66dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="250dp"
+            android:onClick="onTextViewClick"
+            android:text="Витрати"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.097"
+            tools:ignore="HardcodedText,TextSizeCheck,UsingOnClickInXml" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="61dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="50dp"
+            android:onClick="onTextView2Click"
+            android:text="Доходи"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.096"
+            tools:ignore="HardcodedText,TextSizeCheck,UsingOnClickInXml" />
+
+        <Button
+            android:id="@+id/openPanelButton"
+            android:layout_width="103dp"
+            android:layout_height="110dp"
+            android:background="#00ff00"
+            android:onClick="onOpenPanelButtonClick"
+            android:text="Open Panel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText,UsingOnClickInXml,TextContrastCheck" />
+
+        <LinearLayout
+            android:id="@+id/panel1"
+            android:layout_width="101dp"
+            android:layout_height="624dp"
+            android:layout_marginBottom="108dp"
+            android:background="#00BFFF"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="invisible">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:layout_weight="1"
+                android:onClick="onButton3Click"
+                android:text="Календарь Витрат та Доходів"
+                tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
+
+            <Button
+                android:id="@+id/buttonToIncomePage"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:onClick="onButton2Click"
+                android:text="Записати Доходи"
+                tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
+
+            <Button
+                android:id="@+id/buttonToSpendingPage"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_weight="1"
+                android:onClick="onButtonClick"
+                android:text="Записати Витрати"
+                tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
+        </LinearLayout>
+
+        <!-- Добавляем RecyclerView для статистики доходов -->
+
+        <!-- Добавляем RecyclerView для статистики расходов -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
