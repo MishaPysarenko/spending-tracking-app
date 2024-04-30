@@ -20,7 +20,6 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="78dp"
-            app:layout_constraintBottom_toTopOf="@+id/DelIncome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -56,18 +55,6 @@
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/buttonTobackMainPageInIncome"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/DelIncome"
-            android:layout_width="107dp"
-            android:layout_height="99dp"
-            android:layout_marginStart="175dp"
-            android:text="Видалити прибуток"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonTobackMainPageInIncome"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
 
