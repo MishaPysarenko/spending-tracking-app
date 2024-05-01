@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddSpendingPage">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/PageAddSpending"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
+
             <EditText
                 android:id="@+id/editTextAmountSpending"
                 android:layout_width="match_parent"
@@ -23,17 +26,20 @@
                 android:hint="Сума Витрат"
                 android:inputType="numberDecimal"
                 tools:ignore="HardcodedText,MissingConstraints,TextContrastCheck,TouchTargetSizeCheck" />
+
             <EditText
                 android:id="@+id/editTextDescriptionSpending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Опис"
                 tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
             <CheckBox
                 android:id="@+id/checkBoxStableSpending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Стабільні витрати" />
+
             <Button
                 android:id="@+id/buttonAddSpending"
                 android:layout_width="match_parent"
@@ -41,6 +47,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Додати дохід"
                 tools:ignore="HardcodedText,MissingConstraints" />
+
             <Button
                 android:id="@+id/CancelAddSpending"
                 android:layout_width="match_parent"

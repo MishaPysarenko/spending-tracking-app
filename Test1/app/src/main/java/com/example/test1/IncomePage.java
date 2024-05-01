@@ -40,7 +40,7 @@ public class IncomePage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        SumIncome = findViewById(R.id.SumSpending);
+        SumIncome = findViewById(R.id.SumIncome);
         Button goToBackMainMenuFromIncomePage = findViewById(R.id.buttonTobackMainPageInIncome);
         Button goToAddIncome = findViewById(R.id.AddIncome);
 

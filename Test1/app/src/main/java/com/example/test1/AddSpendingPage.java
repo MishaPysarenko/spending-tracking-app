@@ -49,7 +49,11 @@ public class AddSpendingPage extends AppCompatActivity {
             //adapterForSpending.notifyDataSetChanged(); // Обновляем адаптер
         });
 
-        goToBackSpending.setOnClickListener(v -> switchToSpendingPage());
+        goToBackSpending.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SpendingPage.class);
+            startActivity(intent);
+        }
+        );
     }
 
     private void switchToSpendingPage() {

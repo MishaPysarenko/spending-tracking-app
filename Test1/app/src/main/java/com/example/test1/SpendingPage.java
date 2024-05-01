@@ -55,6 +55,7 @@ public class SpendingPage extends AppCompatActivity {
 
         Button goToBackMainMenuFromSpendingPage = findViewById(R.id.buttonToBackMainPageInSpending);
         Button goToAddSpending = findViewById(R.id.AddSpending);
+        SumSpending = findViewById(R.id.SumSpending);
 
         SumSpending.setText(String.valueOf(getAmountSpending()));
         goToAddSpending.setOnClickListener(v -> switchToAddSpendingPage());

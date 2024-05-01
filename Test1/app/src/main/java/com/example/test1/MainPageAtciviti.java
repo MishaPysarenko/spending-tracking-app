@@ -31,6 +31,7 @@ public class MainPageAtciviti extends AppCompatActivity {
         Button panelButton = findViewById(R.id.openPanelButton);
         Button goToIncomePage = findViewById(R.id.buttonToIncomePage);
         Button goToSpendingPage = findViewById(R.id.buttonToSpendingPage);
+        Button goToCalendar = findViewById(R.id.button3);
 
         goToIncomePage.setOnClickListener(v -> {
                 Intent intent = new Intent(this, IncomePage.class);
@@ -42,6 +43,12 @@ public class MainPageAtciviti extends AppCompatActivity {
                 Intent intent = new Intent(this, SpendingPage.class);
                 startActivity(intent);
             }
+        );
+
+        goToCalendar.setOnClickListener(v -> {
+                    Intent intent = new Intent(this, CalendarPage.class);
+                    startActivity(intent);
+                }
         );
 
         panelButton.setOnClickListener(v -> {

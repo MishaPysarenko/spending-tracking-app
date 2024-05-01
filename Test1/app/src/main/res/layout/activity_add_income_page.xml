@@ -6,17 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddIncomePage">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/PageAddIncome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
+
             <EditText
                 android:id="@+id/editTextAmount"
                 android:layout_width="match_parent"
@@ -24,17 +27,20 @@
                 android:hint="Сума доходу"
                 android:inputType="numberDecimal"
                 tools:ignore="HardcodedText,TouchTargetSizeCheck,TextContrastCheck" />
+
             <EditText
                 android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Опис"
                 tools:ignore="TouchTargetSizeCheck" />
+
             <CheckBox
                 android:id="@+id/checkBoxStableIncome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Стабільний дохід" />
+
             <Button
                 android:id="@+id/buttonAddIncome"
                 android:layout_width="match_parent"
@@ -42,6 +48,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Додати дохід"
                 tools:ignore="HardcodedText" />
+
             <Button
                 android:id="@+id/CancelAddIncome"
                 android:layout_width="match_parent"
