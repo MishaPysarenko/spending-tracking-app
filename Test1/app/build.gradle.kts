@@ -1,3 +1,5 @@
+import com.android.builder.files.classpathToRelativeFileSet
+
 plugins {
     alias(libs.plugins.androidApplication)
 }
