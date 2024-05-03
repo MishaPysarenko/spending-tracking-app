@@ -12,57 +12,59 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        tools:visibility="visible"
-        tools:ignore="ExtraText">
+        tools:ignore="ExtraText"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/incomeTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Доходи: $200"
-            android:textSize="20sp"
-            android:textColor="@android:color/holo_green_dark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="Доходи: $200"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Поле для відображення витрат -->
         <TextView
             android:id="@+id/expensesTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Витрати: $100"
-            android:textSize="20sp"
-            android:textColor="@android:color/holo_red_dark"
-            app:layout_constraintTop_toBottomOf="@id/incomeTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Витрати: $100"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/incomeTextView" />
 
         <Button
+            android:id="@+id/openPanelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_background"
-            android:id="@+id/openPanelButton"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="+"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_button_background"
             android:onClick="onOpenPanelButtonClick"
+            android:text="+"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="HardcodedText,UsingOnClickInXml,TextContrastCheck" />
 
         <LinearLayout
             android:id="@+id/panel1"
-            android:layout_width="101dp"
-            android:layout_height="624dp"
+            android:layout_width="155dp"
+            android:layout_height="392dp"
             android:layout_marginBottom="108dp"
             android:background="@android:color/transparent"
             android:orientation="vertical"
