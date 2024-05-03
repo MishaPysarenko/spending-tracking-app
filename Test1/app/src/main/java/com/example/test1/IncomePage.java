@@ -54,13 +54,11 @@ public class IncomePage extends AppCompatActivity {
         SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
     }
     private void switchToMainPage() {
-        Intent intent = new Intent(this, MainPageAtciviti.class);
-        startActivity(intent);
+        startActivity(MainActivity.MainPage);
     }
     private void switchToAddIncomePage()
     {
-        Intent intent = new Intent(this, AddIncomePage.class);
-        startActivity(intent);
+        startActivity(MainActivity.AddIncomePage);
     }
     public static void updateData(){
         adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер

@@ -1,6 +1,5 @@
 package com.example.test1;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -52,8 +51,7 @@ public class AddIncomePage extends AppCompatActivity {
         });
 
         goToBackIncome.setOnClickListener(v -> {
-            Intent intent = new Intent(this, IncomePage.class);
-            startActivity(intent);
+            startActivity(MainActivity.IncomePage);
         });
     }
 }

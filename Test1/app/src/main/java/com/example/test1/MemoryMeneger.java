@@ -76,6 +76,11 @@ public class MemoryMeneger {
         dataListIncome.add(temp);
         saveIncome(temp);
     }
+
+    public static void AddToSpendingList(DataItem temp) {
+        dataListSpending.add(temp);
+        saveSpending(temp);
+    }
     private static void saveIncome(DataItem income) {
         String name = income.getName();
         editorIncomeData.putInt(name + "_sum", Integer.parseInt(income.getSum()));
@@ -129,15 +134,22 @@ public class MemoryMeneger {
         return incomeList;
     }
     public static void delete(String name) {
-        // Удаляем данные для дохода
-        editorIncomeData.remove(name + "_sum").apply();
-        editorIncomeData.remove(name + "_isStable").apply();
-        editorIncomeData.remove(name + "_date").apply();
-
-        // Удаляем данные для трат
-        editorSpendingData.remove(name + "_sum").apply();
-        editorSpendingData.remove(name + "_isStable").apply();
-        editorSpendingData.remove(name + "_date").apply();
+        if(IncomeData.getString(name,null)!=null)
+        {
+            // Удаляем данные для дохода
+            editorIncomeData.remove(name + "_sum").apply();
+            editorIncomeData.remove(name + "_isStable").apply();
+            editorIncomeData.remove(name + "_date").apply();
+            IncomePage.updateData();
+        }
+        if(SpendingData.getString(name,null)!=null)
+        {
+            // Удаляем данные для трат
+            editorSpendingData.remove(name + "_sum").apply();
+            editorSpendingData.remove(name + "_isStable").apply();
+            editorSpendingData.remove(name + "_date").apply();
+            SpendingPage.updateData();
+        }
     }
     public static int GetAmountIncome() {
         int res = 0;

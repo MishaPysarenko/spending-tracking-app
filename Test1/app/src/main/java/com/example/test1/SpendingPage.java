@@ -50,12 +50,10 @@ public class SpendingPage extends AppCompatActivity {
         goToBackMainMenuFromSpendingPage.setOnClickListener(v -> switchToMainPage());
     }
     private void switchToAddSpendingPage() {
-        Intent intent = new Intent(this, AddSpendingPage.class);
-        startActivity(intent);
+        startActivity(MainActivity.AddSpendingPage);
     }
     private void switchToMainPage() {
-        Intent intent = new Intent(this, MainPageAtciviti.class);
-        startActivity(intent);
+        startActivity(MainActivity.MainPage);
     }
     public static void updateData(){
         adapterForSpending.notifyDataSetChanged(); // Обновляем адаптер

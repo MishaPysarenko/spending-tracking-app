@@ -44,20 +44,17 @@ public class MainPageAtciviti extends AppCompatActivity {
         Speding.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
 
         goToIncomePage.setOnClickListener(v -> {
-                Intent intent = new Intent(this, IncomePage.class);
-                startActivity(intent);
+                startActivity(MainActivity.IncomePage);
             }
         );
 
         goToSpendingPage.setOnClickListener(v -> {
-                Intent intent = new Intent(this, SpendingPage.class);
-                startActivity(intent);
+                startActivity(MainActivity.SpendingPage);
             }
         );
 
         goToCalendar.setOnClickListener(v -> {
-                    Intent intent = new Intent(this, CalendarPage.class);
-                    startActivity(intent);
+                    startActivity(MainActivity.CalendarPage);
                 }
         );
 
