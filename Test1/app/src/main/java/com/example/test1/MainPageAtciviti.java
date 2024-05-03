@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainPageAtciviti extends AppCompatActivity {
 
     private LinearLayout panelLayout;
+    private static TextView Income;
+    private static TextView Speding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,13 @@ public class MainPageAtciviti extends AppCompatActivity {
         Button goToIncomePage = findViewById(R.id.buttonToIncomePage);
         Button goToSpendingPage = findViewById(R.id.buttonToSpendingPage);
         Button goToCalendar = findViewById(R.id.button3);
+
+        Income = findViewById(R.id.incomeTextView);
+        Speding = findViewById(R.id.expensesTextView);
+
+        //Если тебе надо протестировать именно статический текст который ты забиндеш, коментируй эти две строки
+        Income.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
+        Speding.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
 
         goToIncomePage.setOnClickListener(v -> {
                 Intent intent = new Intent(this, IncomePage.class);
@@ -54,5 +64,9 @@ public class MainPageAtciviti extends AppCompatActivity {
         panelButton.setOnClickListener(v -> {
             panelLayout.setVisibility(panelLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         });
+    }
+    public static void updateData(){
+        Income.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
+        Speding.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
     }
 }

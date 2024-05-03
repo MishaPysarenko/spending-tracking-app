@@ -28,7 +28,6 @@ public class AddSpendingPage extends AppCompatActivity {
             return insets;
         });
     }
-
     private void initAddSpendingPageButtons() {
         Button goToBackSpending = findViewById(R.id.CancelAddSpending);
         Button addSpending = findViewById(R.id.buttonAddSpending);
@@ -43,10 +42,10 @@ public class AddSpendingPage extends AppCompatActivity {
             String date = String.valueOf(calendar.get(Calendar.DATE) + "."+ (calendar.get(Calendar.MONTH) + 1) + "."+ calendar.get(Calendar.YEAR));
             DataItem temp = new DataItem(spendingAmount, spendingDescription, date , checkBoxSpending.isChecked());
 
-            //dataListSpending.add(temp);
-            //memoryMeneger.saveSpending(temp);
+            MemoryMeneger.AddToIncomeList(temp);
 
-            //adapterForSpending.notifyDataSetChanged(); // Обновляем адаптер
+            SpendingPage.updateData();//Обновляем адаптер
+            MainPageAtciviti.updateData();//Обнавляем данные на главной странице
         });
 
         goToBackSpending.setOnClickListener(v -> {
@@ -54,10 +53,5 @@ public class AddSpendingPage extends AppCompatActivity {
             startActivity(intent);
         }
         );
-    }
-
-    private void switchToSpendingPage() {
-        Intent intent = new Intent(this, SpendingPage.class);
-        startActivity(intent);
     }
 }

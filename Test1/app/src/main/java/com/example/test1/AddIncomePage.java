@@ -45,17 +45,15 @@ public class AddIncomePage extends AppCompatActivity {
             String date = String.valueOf(calendar.get(Calendar.DATE) + "."+ (calendar.get(Calendar.MONTH) + 1) + "."+ calendar.get(Calendar.YEAR));
             DataItem temp = new DataItem(incomeAmount, incomeDescription, date, checkBoxIncome.isChecked());
 
-            //dataListIncome.add(temp);
-            //memoryMeneger.saveIncome(temp);
+            MemoryMeneger.AddToIncomeList(temp);
 
-            //adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер
+            IncomePage.updateData();//Обновляем адаптер
+            MainPageAtciviti.updateData(); //Обнавляем данные на главной странице
         });
 
-        goToBackIncome.setOnClickListener(v -> switchToIncomePage());
-    }
-
-    private void switchToIncomePage() {
-        Intent intent = new Intent(this, IncomePage.class);
-        startActivity(intent);
+        goToBackIncome.setOnClickListener(v -> {
+            Intent intent = new Intent(this, IncomePage.class);
+            startActivity(intent);
+        });
     }
 }

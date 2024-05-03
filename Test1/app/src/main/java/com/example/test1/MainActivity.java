@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        MemoryMeneger.init(this);
+        MemoryMeneger.AddDebugDATA(); //Коменти эту стору чтобы убрать данные для отладки
         switchToMainPage();
 
     }

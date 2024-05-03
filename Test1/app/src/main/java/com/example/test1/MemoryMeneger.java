@@ -9,22 +9,47 @@ import java.util.Map;
 
 public class MemoryMeneger {
     //хуйня для сохранения в память телефона, разбита сразу на доходы и траты
-    private SharedPreferences IncomeData;
-    private SharedPreferences.Editor editorIncomeData;
-    private SharedPreferences SpendingData;
-    private SharedPreferences.Editor editorSpendingData;
+    private static SharedPreferences IncomeData;
+    private static SharedPreferences.Editor editorIncomeData;
+    private static SharedPreferences SpendingData;
+    private static SharedPreferences.Editor editorSpendingData;
 
-    private SharedPreferences SpendingStatistics;
-    private SharedPreferences.Editor editorSpendingStatistics;
-    private SharedPreferences StatisticsIncome;
-    private SharedPreferences.Editor editorStatisticsIncome;
-    private Context mContext; // Добавляем поле для хранения контекста
+    private static SharedPreferences SpendingStatistics;
+    private static SharedPreferences.Editor editorSpendingStatistics;
+    private static SharedPreferences StatisticsIncome;
+    private static SharedPreferences.Editor editorStatisticsIncome;
+    private static Context mContext; // Добавляем поле для хранения контекста
+    private static List<DataItem> dataListIncome;
+    private static List<DataItem> dataListSpending;
 
-    public MemoryMeneger(Context context) {
-        this.mContext = context; // Сохраняем переданный контекст
-        init(); // Вызываем метод инициализации
+    public static void AddDebugDATA() {
+        DataItem temp1 = new DataItem("500","Параш лента","03.05.2024",true);
+        dataListSpending.add(temp1);
+        DataItem temp2 = new DataItem("360","Жижка","03.05.2024",false);
+        dataListSpending.add(temp2);
+        DataItem temp3 = new DataItem("750","Винцо","03.05.2024",true);
+        dataListSpending.add(temp3);
+        DataItem temp4 = new DataItem("1500","Я хуй знает","03.05.2024",false);
+        dataListSpending.add(temp4);
+        DataItem temp5 = new DataItem("400","Шавуха","03.05.2024",false);
+        dataListSpending.add(temp5);
+
+        DataItem temp6 = new DataItem("600","Нашел на улице","03.05.2024",true);
+        dataListIncome.add(temp6);
+        DataItem temp7 = new DataItem("360","у друга спиздил","03.05.2024",false);
+        dataListIncome.add(temp7);
+        DataItem temp8 = new DataItem("750","Отдал вино","03.05.2024",false);
+        dataListIncome.add(temp8);
+        DataItem temp9 = new DataItem("1500","ЗП","03.05.2024",true);
+        dataListIncome.add(temp9);
+        DataItem temp10 = new DataItem("400","Шавуха оказалась просроченой","03.05.2024",false);
+        dataListIncome.add(temp10);
     }
-    public void init() {
+    private MemoryMeneger() {
+
+    }
+    public static void init(Context context) {
+        mContext = context;
         // Получаем объекты SharedPreferences с помощью контекста
         IncomeData = mContext.getSharedPreferences("Income", Context.MODE_PRIVATE);
         editorIncomeData = IncomeData.edit();
@@ -37,22 +62,43 @@ public class MemoryMeneger {
 
         SpendingStatistics = mContext.getSharedPreferences("SpendingStatistics", Context.MODE_PRIVATE);
         editorSpendingStatistics = SpendingStatistics.edit();
+
+        dataListIncome = getIncome();
+        dataListSpending = getSpending();
+
+        if (dataListIncome == null)
+            dataListIncome = new ArrayList<>();
+
+        if (dataListSpending == null)
+            dataListSpending = new ArrayList<>();
     }
-    public void saveIncome(DataItem income) {
+    public static void AddToIncomeList(DataItem temp) {
+        dataListIncome.add(temp);
+        saveIncome(temp);
+    }
+    private static void saveIncome(DataItem income) {
         String name = income.getName();
         editorIncomeData.putInt(name + "_sum", Integer.parseInt(income.getSum()));
         editorIncomeData.putBoolean(name + "_isStable", income.getIsStable());
         editorIncomeData.putString(name + "_date", income.getDate());
         editorIncomeData.apply();
     }
-    public void saveSpending(DataItem spending) {
+    public static void saveSpending(DataItem spending) {
         String name = spending.getName();
         editorSpendingData.putInt(name + "_sum", Integer.parseInt(spending.getSum()));
         editorSpendingData.putBoolean(name + "_isStable", spending.getIsStable());
         editorSpendingData.putString(name + "_date", spending.getDate());
         editorSpendingData.apply();
     }
-    public List<DataItem> getSpending() {
+    public static List<DataItem> GetListSpending(){
+        List<DataItem> spendingList = dataListSpending;
+        return spendingList;
+    }
+    public static List<DataItem> GetListIncome(){
+        List<DataItem> incomeList = dataListIncome;
+        return incomeList;
+    }
+    private static List<DataItem> getSpending() {
         List<DataItem> spendingList = new ArrayList<>();
         Map<String, ?> spendingEntries = SpendingData.getAll();
         for (Map.Entry<String, ?> entry : spendingEntries.entrySet()) {
@@ -67,7 +113,7 @@ public class MemoryMeneger {
         }
         return spendingList;
     }
-    public List<DataItem> getIncome() {
+    private static List<DataItem> getIncome() {
         List<DataItem> incomeList = new ArrayList<>();
         Map<String, ?> incomeEntries = IncomeData.getAll();
         for (Map.Entry<String, ?> entry : incomeEntries.entrySet()) {
@@ -82,7 +128,7 @@ public class MemoryMeneger {
         }
         return incomeList;
     }
-    public void delete(String name) {
+    public static void delete(String name) {
         // Удаляем данные для дохода
         editorIncomeData.remove(name + "_sum").apply();
         editorIncomeData.remove(name + "_isStable").apply();
@@ -92,5 +138,43 @@ public class MemoryMeneger {
         editorSpendingData.remove(name + "_sum").apply();
         editorSpendingData.remove(name + "_isStable").apply();
         editorSpendingData.remove(name + "_date").apply();
+    }
+    public static int GetAmountIncome() {
+        int res = 0;
+        if (dataListIncome != null) {
+            for (DataItem item : dataListIncome) {
+                if (item != null) {
+                    String sum = item.getSum();
+                    if (sum != null && !sum.isEmpty()) {
+                        try {
+                            int amount = Integer.parseInt(sum);
+                            res += amount;
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace(); // Логирование ошибки
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    public static int GetAmountSpending() {
+        int res = 0;
+        if (dataListSpending != null) {
+            for (DataItem item : dataListSpending) {
+                if (item != null) {
+                    String sum = item.getSum();
+                    if (sum != null && !sum.isEmpty()) {
+                        try {
+                            int amount = Integer.parseInt(sum);
+                            res += amount;
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace(); // Логирование ошибки
+                        }
+                    }
+                }
+            }
+        }
+        return res;
     }
 }

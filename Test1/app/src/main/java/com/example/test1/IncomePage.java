@@ -21,13 +21,9 @@ import java.util.List;
 
 public class IncomePage extends AppCompatActivity {
     private Calendar calendar;
-    private MemoryMeneger memoryMeneger;
-    private TextView SumIncome;
+    private static TextView SumIncome;
     private RecyclerView recyclerViewForIncome;
-    private MyAdapter adapterForIncome;
-    private List<DataItem> dataListIncome;
-    private ConstraintLayout incomePage;
-    private ConstraintLayout addIncomePage;
+    private static MyAdapter adapterForIncome;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,24 +40,18 @@ public class IncomePage extends AppCompatActivity {
         Button goToBackMainMenuFromIncomePage = findViewById(R.id.buttonTobackMainPageInIncome);
         Button goToAddIncome = findViewById(R.id.AddIncome);
 
-        memoryMeneger = new MemoryMeneger(this);
         calendar = Calendar.getInstance();
-        dataListIncome = memoryMeneger.getIncome();
 
         recyclerViewForIncome = findViewById(R.id.ListIncome);
         recyclerViewForIncome.setLayoutManager(new LinearLayoutManager(this));
 
-        if (dataListIncome == null)
-            dataListIncome = new ArrayList<>();
-        else
-            adapterForIncome = new MyAdapter(dataListIncome, memoryMeneger, this);
+        adapterForIncome = new MyAdapter(MemoryMeneger.GetListIncome(), this);
 
-        if (adapterForIncome != null)
-            recyclerViewForIncome.setAdapter(adapterForIncome);
+        recyclerViewForIncome.setAdapter(adapterForIncome);
 
         goToAddIncome.setOnClickListener(v -> switchToAddIncomePage());
         goToBackMainMenuFromIncomePage.setOnClickListener(v -> switchToMainPage());
-        SumIncome.setText(String.valueOf(getAmountIncome()));
+        SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
     }
     private void switchToMainPage() {
         Intent intent = new Intent(this, MainPageAtciviti.class);
@@ -72,23 +62,8 @@ public class IncomePage extends AppCompatActivity {
         Intent intent = new Intent(this, AddIncomePage.class);
         startActivity(intent);
     }
-    private int getAmountIncome() {
-        int res = 0;
-        if (dataListIncome != null) {
-            for (DataItem item : dataListIncome) {
-                if (item != null) {
-                    String sum = item.getSum();
-                    if (sum != null && !sum.isEmpty()) {
-                        try {
-                            int amount = Integer.parseInt(sum);
-                            res += amount;
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace(); // Логирование ошибки
-                        }
-                    }
-                }
-            }
-        }
-        return res;
+    public static void updateData(){
+        adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер
+        SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
     }
 }

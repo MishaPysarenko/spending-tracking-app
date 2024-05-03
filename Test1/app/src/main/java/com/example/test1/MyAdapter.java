@@ -17,12 +17,11 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<DataItem> dataList;
-    private MemoryMeneger memoryMeneger;
     private Context context;
 
-    public MyAdapter(List<DataItem> dataList, MemoryMeneger memoryMeneger, Context context) {
+
+    public MyAdapter(List<DataItem> dataList, Context context) {
         this.dataList = dataList;
-        this.memoryMeneger = memoryMeneger;
         this.context = context;
     }
 
@@ -47,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     // Уведомление адаптера об удалении элемента
                     notifyItemRemoved(position);
                     // Уведомление менеджера о удалении элемента из памяти
-                    memoryMeneger.delete(item.getName());
+                    MemoryMeneger.delete(item.getName());
                     // Всплывающее уведомление о нажатии на кнопку
                     Toast.makeText(context, "Об'єкт:\"" + item.getName() + "\" був видаланим" + item.getDate(), Toast.LENGTH_SHORT).show();
                 }

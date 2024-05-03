@@ -19,11 +19,9 @@ import java.util.List;
 
 public class SpendingPage extends AppCompatActivity {
     private Calendar calendar;
-    private MemoryMeneger memoryMeneger;
-    private TextView SumSpending;
-    private List<DataItem> dataListSpending;
+    private static TextView SumSpending;
     private RecyclerView recyclerViewForSpending;
-    private MyAdapter adapterForSpending;
+    private static MyAdapter adapterForSpending;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,29 +33,19 @@ public class SpendingPage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        memoryMeneger = new MemoryMeneger(this);
-        calendar = Calendar.getInstance();
 
         recyclerViewForSpending = findViewById(R.id.ListSpending);
         recyclerViewForSpending.setLayoutManager(new LinearLayoutManager(this));
 
-        dataListSpending = memoryMeneger.getSpending();
+        adapterForSpending = new MyAdapter(MemoryMeneger.GetListSpending(), this);
 
-        if (dataListSpending == null)
-            dataListSpending = new ArrayList<>();
-        else
-            adapterForSpending = new MyAdapter(dataListSpending, memoryMeneger, this);
-
-        if (adapterForSpending != null)
-            recyclerViewForSpending.setAdapter(adapterForSpending);
-
-
+        recyclerViewForSpending.setAdapter(adapterForSpending);
 
         Button goToBackMainMenuFromSpendingPage = findViewById(R.id.buttonToBackMainPageInSpending);
         Button goToAddSpending = findViewById(R.id.AddSpending);
         SumSpending = findViewById(R.id.SumSpending);
 
-        SumSpending.setText(String.valueOf(getAmountSpending()));
+        SumSpending.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
         goToAddSpending.setOnClickListener(v -> switchToAddSpendingPage());
         goToBackMainMenuFromSpendingPage.setOnClickListener(v -> switchToMainPage());
     }
@@ -69,23 +57,8 @@ public class SpendingPage extends AppCompatActivity {
         Intent intent = new Intent(this, MainPageAtciviti.class);
         startActivity(intent);
     }
-    private int getAmountSpending() {
-        int res = 0;
-        if (dataListSpending != null) {
-            for (DataItem item : dataListSpending) {
-                if (item != null) {
-                    String sum = item.getSum();
-                    if (sum != null && !sum.isEmpty()) {
-                        try {
-                            int amount = Integer.parseInt(sum);
-                            res += amount;
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace(); // Логирование ошибки
-                        }
-                    }
-                }
-            }
-        }
-        return res;
+    public static void updateData(){
+        adapterForSpending.notifyDataSetChanged(); // Обновляем адаптер
+        SumSpending.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
     }
 }
