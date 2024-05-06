@@ -13,14 +13,17 @@ public class MemoryMeneger {
     private static SharedPreferences.Editor editorIncomeData;
     private static SharedPreferences SpendingData;
     private static SharedPreferences.Editor editorSpendingData;
-
+    //Для календаря
     private static SharedPreferences SpendingStatistics;
     private static SharedPreferences.Editor editorSpendingStatistics;
     private static SharedPreferences StatisticsIncome;
     private static SharedPreferences.Editor editorStatisticsIncome;
+    //---------------------------------------------------------------------
     private static Context mContext; // Добавляем поле для хранения контекста
     private static List<DataItem> dataListIncome;
     private static List<DataItem> dataListSpending;
+    private static List<DataItem> dataListStatisticsIncome;
+    private static List<DataItem> dataListStatisticsSpending;
 
     public static void AddDebugDATA() {
         DataItem temp1 = new DataItem("500","Параш лента","03.05.2024",true);
@@ -57,28 +60,48 @@ public class MemoryMeneger {
         SpendingData = mContext.getSharedPreferences("Spending", Context.MODE_PRIVATE);
         editorSpendingData = SpendingData.edit();
 
+        //---------------------------------------------------------------------------------------------------
         StatisticsIncome = mContext.getSharedPreferences("IncomeStatistics", Context.MODE_PRIVATE);
         editorStatisticsIncome = StatisticsIncome.edit();
 
         SpendingStatistics = mContext.getSharedPreferences("SpendingStatistics", Context.MODE_PRIVATE);
         editorSpendingStatistics = SpendingStatistics.edit();
+        //---------------------------------------------------------------------------------------------------
 
         dataListIncome = getIncome();
         dataListSpending = getSpending();
+
+        dataListStatisticsIncome = getStatisticIncome();
+        dataListStatisticsSpending = getStatisticSpending();
 
         if (dataListIncome == null)
             dataListIncome = new ArrayList<>();
 
         if (dataListSpending == null)
             dataListSpending = new ArrayList<>();
+
+
+
+        if (dataListStatisticsIncome == null)
+            dataListStatisticsIncome = new ArrayList<>();
+
+        if (dataListStatisticsSpending == null)
+            dataListStatisticsSpending = new ArrayList<>();
     }
     public static void AddToIncomeList(DataItem temp) {
         dataListIncome.add(temp);
         saveIncome(temp);
     }
-
     public static void AddToSpendingList(DataItem temp) {
         dataListSpending.add(temp);
+        saveSpending(temp);
+    }
+    public static void AddToStatisticsIncomeList(DataItem temp) {
+        dataListStatisticsIncome.add(temp);
+        saveIncome(temp);
+    }
+    public static void AddToStatisticsSpendingList(DataItem temp) {
+        dataListStatisticsSpending.add(temp);
         saveSpending(temp);
     }
     private static void saveIncome(DataItem income) {
@@ -95,13 +118,65 @@ public class MemoryMeneger {
         editorSpendingData.putString(name + "_date", spending.getDate());
         editorSpendingData.apply();
     }
+    private static void saveStatisticsIncome(DataItem income) {
+        String name = income.getName();
+        editorStatisticsIncome.putInt(name + "_sum", Integer.parseInt(income.getSum()));
+        editorStatisticsIncome.putBoolean(name + "_isStable", income.getIsStable());
+        editorStatisticsIncome.putString(name + "_date", income.getDate());
+        editorStatisticsIncome.apply();
+    }
+    public static void saveStatisticsSpending(DataItem spending) {
+        String name = spending.getName();
+        editorSpendingStatistics.putInt(name + "_sum", Integer.parseInt(spending.getSum()));
+        editorSpendingStatistics.putBoolean(name + "_isStable", spending.getIsStable());
+        editorSpendingStatistics.putString(name + "_date", spending.getDate());
+        editorSpendingStatistics.apply();
+    }
     public static List<DataItem> GetListSpending(){
+        List<DataItem> spendingList = dataListStatisticsSpending;
+        return spendingList;
+    }
+    public static List<DataItem> GetListStatisticsIncome(){
+        List<DataItem> incomeList = dataListStatisticsIncome;
+        return incomeList;
+    }
+    public static List<DataItem> GetListStatisticsSpending(){
         List<DataItem> spendingList = dataListSpending;
         return spendingList;
     }
     public static List<DataItem> GetListIncome(){
         List<DataItem> incomeList = dataListIncome;
         return incomeList;
+    }
+    private static List<DataItem> getStatisticIncome() {
+        List<DataItem> incomeList = new ArrayList<>();
+        Map<String, ?> incomeEntries = StatisticsIncome.getAll();
+        for (Map.Entry<String, ?> entry : incomeEntries.entrySet()) {
+            String name = entry.getKey();
+            if (name.endsWith("_sum")) {
+                String itemName = name.replace("_sum", "");
+                int sum = StatisticsIncome.getInt(name, 0); // Значение по умолчанию 0
+                boolean isStable = StatisticsIncome.getBoolean(itemName + "_isStable", false);
+                String date = StatisticsIncome.getString(itemName + "_date", "");
+                incomeList.add(new DataItem(String.valueOf(sum), itemName, date, isStable));
+            }
+        }
+        return incomeList;
+    }
+    private static List<DataItem> getStatisticSpending() {
+        List<DataItem> spendingList = new ArrayList<>();
+        Map<String, ?> spendingEntries = SpendingStatistics.getAll();
+        for (Map.Entry<String, ?> entry : spendingEntries.entrySet()) {
+            String name = entry.getKey();
+            if (name.endsWith("_sum")) {
+                int sum = SpendingStatistics.getInt(name, 0); // Значение по умолчанию 0
+                String itemName = name.replace("_sum", "");
+                boolean isStable = SpendingStatistics.getBoolean(itemName + "_isStable", false);
+                String date = SpendingStatistics.getString(itemName + "_date", "");
+                spendingList.add(new DataItem(String.valueOf(sum), itemName, date, isStable));
+            }
+        }
+        return spendingList;
     }
     private static List<DataItem> getSpending() {
         List<DataItem> spendingList = new ArrayList<>();
