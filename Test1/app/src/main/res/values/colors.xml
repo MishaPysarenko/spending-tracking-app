@@ -2,6 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
     <color name="button_background_color">#FF000000</color>
     <color name="button_border_color">#FFFFFFFF</color>
+    
+    <color name="background">#F9F3DF</color>
+
+    <color name="rippleColor">#03FF32</color>
+    <color name="indicatorColor">#03FF32</color>
+    <color name="background_nav_color">#FF5722</color>
+    <color name="main">#FF5722</color>
+
+
 </resources>

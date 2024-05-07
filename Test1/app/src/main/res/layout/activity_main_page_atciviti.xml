@@ -13,12 +13,43 @@
         android:layout_height="match_parent"
         android:visibility="visible"
         tools:ignore="ExtraText"
-        android:background="#F9F3DF"
+        android:background="@color/background"
         tools:layout_editor_absoluteX="-62dp"
         tools:layout_editor_absoluteY="-110dp"
         tools:visibility="visible">
 
         <!-- Поле для відображення витрат -->
+        <LinearLayout
+            android:layout_width="409dp"
+            android:layout_height="203dp"
+            android:orientation="vertical"
+            android:background="#FFC898"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/incomeTextView"
+                android:layout_width="189dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Доходи: $200"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/expensesTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Витрати: $100"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/openPanelButton"
@@ -73,37 +104,17 @@
                 tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="409dp"
-            android:layout_height="203dp"
-            android:orientation="vertical"
-            android:background="#FFC898"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:menu="@menu/bottom_nav"/>
 
-            <TextView
-                android:id="@+id/incomeTextView"
-                android:layout_width="189dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="Доходи: $200"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/expensesTextView"
-                android:layout_width="156dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="Витрати: $100"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="20sp" />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
