@@ -9,13 +9,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ListForStatistic"
-        android:layout_width="412dp"
-        android:layout_height="190dp"
+        android:layout_width="411dp"
+        android:layout_height="684dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Back"
         tools:ignore="MissingConstraints"
-        tools:listitem="@layout/list_item_layout" />
+        tools:listitem="@layout/list_item_statistic" />
 
     <Button
         android:id="@+id/Back"
@@ -25,51 +26,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="84dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:text="Прибуток"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="96dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="48dp"
-        android:text="Витрати"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Income"
-        android:layout_width="83dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/Spending"
-        android:layout_width="97dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/Income"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/Date"
-        android:layout_width="111dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

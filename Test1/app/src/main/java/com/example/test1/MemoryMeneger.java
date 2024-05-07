@@ -14,16 +14,13 @@ public class MemoryMeneger {
     private static SharedPreferences SpendingData;
     private static SharedPreferences.Editor editorSpendingData;
     //Для календаря
-    private static SharedPreferences SpendingStatistics;
-    private static SharedPreferences.Editor editorSpendingStatistics;
-    private static SharedPreferences StatisticsIncome;
-    private static SharedPreferences.Editor editorStatisticsIncome;
+    private static SharedPreferences Statistics;
+    private static SharedPreferences.Editor editorStatistics;
     //---------------------------------------------------------------------
     private static Context mContext; // Добавляем поле для хранения контекста
     private static List<DataItem> dataListIncome;
     private static List<DataItem> dataListSpending;
-    private static List<DataItem> dataListStatisticsIncome;
-    private static List<DataItem> dataListStatisticsSpending;
+    private static List<DataItem> dataListStatistics;
 
     public static void AddDebugDATA() {
         DataItem temp1 = new DataItem("500","Параш лента","03.05.2024",true);
@@ -38,15 +35,26 @@ public class MemoryMeneger {
         dataListSpending.add(temp5);
 
         DataItem temp6 = new DataItem("600","Нашел на улице","03.05.2024",true);
-        dataListIncome.add(temp6);
+        dataListStatistics.add(temp6);
         DataItem temp7 = new DataItem("360","у друга спиздил","03.05.2024",false);
-        dataListIncome.add(temp7);
+        dataListStatistics.add(temp7);
         DataItem temp8 = new DataItem("750","Отдал вино","03.05.2024",false);
-        dataListIncome.add(temp8);
+        dataListStatistics.add(temp8);
         DataItem temp9 = new DataItem("1500","ЗП","03.05.2024",true);
-        dataListIncome.add(temp9);
+        dataListStatistics.add(temp9);
         DataItem temp10 = new DataItem("400","Шавуха оказалась просроченой","03.05.2024",false);
-        dataListIncome.add(temp10);
+        dataListStatistics.add(temp10);
+
+        DataItem temp11 = new DataItem("600","Нашел на улице","03.05.2024",true);
+        dataListStatistics.add(temp6);
+        DataItem temp12 = new DataItem("360","у друга спиздил","03.05.2024",false);
+        dataListStatistics.add(temp7);
+        DataItem temp13 = new DataItem("750","Отдал вино","03.05.2024",false);
+        dataListStatistics.add(temp8);
+        DataItem temp14 = new DataItem("1500","ЗП","03.05.2024",true);
+        dataListStatistics.add(temp9);
+        DataItem temp15 = new DataItem("400","Шавуха оказалась просроченой","03.05.2024",false);
+        dataListStatistics.add(temp10);
     }
     private MemoryMeneger() {
 
@@ -61,18 +69,14 @@ public class MemoryMeneger {
         editorSpendingData = SpendingData.edit();
 
         //---------------------------------------------------------------------------------------------------
-        StatisticsIncome = mContext.getSharedPreferences("IncomeStatistics", Context.MODE_PRIVATE);
-        editorStatisticsIncome = StatisticsIncome.edit();
-
-        SpendingStatistics = mContext.getSharedPreferences("SpendingStatistics", Context.MODE_PRIVATE);
-        editorSpendingStatistics = SpendingStatistics.edit();
+        Statistics = mContext.getSharedPreferences("Statistics", Context.MODE_PRIVATE);
+        editorStatistics = Statistics.edit();
         //---------------------------------------------------------------------------------------------------
 
         dataListIncome = getIncome();
         dataListSpending = getSpending();
 
-        dataListStatisticsIncome = getStatisticIncome();
-        dataListStatisticsSpending = getStatisticSpending();
+        dataListStatistics = getStatistic();
 
         if (dataListIncome == null)
             dataListIncome = new ArrayList<>();
@@ -80,13 +84,9 @@ public class MemoryMeneger {
         if (dataListSpending == null)
             dataListSpending = new ArrayList<>();
 
+        if (dataListStatistics == null)
+            dataListStatistics = new ArrayList<>();
 
-
-        if (dataListStatisticsIncome == null)
-            dataListStatisticsIncome = new ArrayList<>();
-
-        if (dataListStatisticsSpending == null)
-            dataListStatisticsSpending = new ArrayList<>();
     }
     public static void AddToIncomeList(DataItem temp) {
         dataListIncome.add(temp);
@@ -96,13 +96,9 @@ public class MemoryMeneger {
         dataListSpending.add(temp);
         saveSpending(temp);
     }
-    public static void AddToStatisticsIncomeList(DataItem temp) {
-        dataListStatisticsIncome.add(temp);
+    public static void AddToStatisticsList(DataItem temp) {
+        dataListStatistics.add(temp);
         saveIncome(temp);
-    }
-    public static void AddToStatisticsSpendingList(DataItem temp) {
-        dataListStatisticsSpending.add(temp);
-        saveSpending(temp);
     }
     private static void saveIncome(DataItem income) {
         String name = income.getName();
@@ -118,65 +114,39 @@ public class MemoryMeneger {
         editorSpendingData.putString(name + "_date", spending.getDate());
         editorSpendingData.apply();
     }
-    private static void saveStatisticsIncome(DataItem income) {
+    private static void saveStatistics(DataItem income) {
         String name = income.getName();
-        editorStatisticsIncome.putInt(name + "_sum", Integer.parseInt(income.getSum()));
-        editorStatisticsIncome.putBoolean(name + "_isStable", income.getIsStable());
-        editorStatisticsIncome.putString(name + "_date", income.getDate());
-        editorStatisticsIncome.apply();
+        editorStatistics.putInt(name + "_sum", Integer.parseInt(income.getSum()));
+        editorStatistics.putBoolean(name + "_isStable", income.getIsStable());
+        editorStatistics.putString(name + "_date", income.getDate());
+        editorStatistics.apply();
     }
-    public static void saveStatisticsSpending(DataItem spending) {
-        String name = spending.getName();
-        editorSpendingStatistics.putInt(name + "_sum", Integer.parseInt(spending.getSum()));
-        editorSpendingStatistics.putBoolean(name + "_isStable", spending.getIsStable());
-        editorSpendingStatistics.putString(name + "_date", spending.getDate());
-        editorSpendingStatistics.apply();
-    }
-    public static List<DataItem> GetListSpending(){
-        List<DataItem> spendingList = dataListStatisticsSpending;
-        return spendingList;
-    }
-    public static List<DataItem> GetListStatisticsIncome(){
-        List<DataItem> incomeList = dataListStatisticsIncome;
+    public static List<DataItem> GetListStatistics(){
+        List<DataItem> incomeList = dataListStatistics;
         return incomeList;
-    }
-    public static List<DataItem> GetListStatisticsSpending(){
-        List<DataItem> spendingList = dataListSpending;
-        return spendingList;
     }
     public static List<DataItem> GetListIncome(){
         List<DataItem> incomeList = dataListIncome;
         return incomeList;
     }
-    private static List<DataItem> getStatisticIncome() {
+    public static List<DataItem> GetListSpending(){
+        List<DataItem> incomeList = dataListSpending;
+        return incomeList;
+    }
+    private static List<DataItem> getStatistic() {
         List<DataItem> incomeList = new ArrayList<>();
-        Map<String, ?> incomeEntries = StatisticsIncome.getAll();
+        Map<String, ?> incomeEntries = Statistics.getAll();
         for (Map.Entry<String, ?> entry : incomeEntries.entrySet()) {
             String name = entry.getKey();
             if (name.endsWith("_sum")) {
                 String itemName = name.replace("_sum", "");
-                int sum = StatisticsIncome.getInt(name, 0); // Значение по умолчанию 0
-                boolean isStable = StatisticsIncome.getBoolean(itemName + "_isStable", false);
-                String date = StatisticsIncome.getString(itemName + "_date", "");
+                int sum = Statistics.getInt(name, 0); // Значение по умолчанию 0
+                boolean isStable = Statistics.getBoolean(itemName + "_isStable", false);
+                String date = Statistics.getString(itemName + "_date", "");
                 incomeList.add(new DataItem(String.valueOf(sum), itemName, date, isStable));
             }
         }
         return incomeList;
-    }
-    private static List<DataItem> getStatisticSpending() {
-        List<DataItem> spendingList = new ArrayList<>();
-        Map<String, ?> spendingEntries = SpendingStatistics.getAll();
-        for (Map.Entry<String, ?> entry : spendingEntries.entrySet()) {
-            String name = entry.getKey();
-            if (name.endsWith("_sum")) {
-                int sum = SpendingStatistics.getInt(name, 0); // Значение по умолчанию 0
-                String itemName = name.replace("_sum", "");
-                boolean isStable = SpendingStatistics.getBoolean(itemName + "_isStable", false);
-                String date = SpendingStatistics.getString(itemName + "_date", "");
-                spendingList.add(new DataItem(String.valueOf(sum), itemName, date, isStable));
-            }
-        }
-        return spendingList;
     }
     private static List<DataItem> getSpending() {
         List<DataItem> spendingList = new ArrayList<>();
@@ -224,6 +194,39 @@ public class MemoryMeneger {
             editorSpendingData.remove(name + "_isStable").apply();
             editorSpendingData.remove(name + "_date").apply();
             SpendingPage.updateData();
+        }
+        if(Statistics.getString(name,null)!=null)
+        {
+            // Удаляем данные для трат
+            editorStatistics.remove(name + "_sum").apply();
+            editorStatistics.remove(name + "_isStable").apply();
+            editorStatistics.remove(name + "_date").apply();
+            SpendingPage.updateData();
+        }
+    }
+    public static void deleteFalseItems() {
+        // Удаляем элементы с булевым значением false из данных для дохода
+        for (Map.Entry<String, ?> entry : IncomeData.getAll().entrySet()) {
+            String key = entry.getKey();
+            if (key.endsWith("_isStable") && !IncomeData.getBoolean(key, true)) {
+                String name = key.substring(0, key.length() - "_isStable".length());
+                editorIncomeData.remove(name + "_sum").apply();
+                editorIncomeData.remove(name + "_isStable").apply();
+                editorIncomeData.remove(name + "_date").apply();
+                IncomePage.updateData();
+            }
+        }
+
+        // Удаляем элементы с булевым значением false из данных для трат
+        for (Map.Entry<String, ?> entry : SpendingData.getAll().entrySet()) {
+            String key = entry.getKey();
+            if (key.endsWith("_isStable") && !SpendingData.getBoolean(key, true)) {
+                String name = key.substring(0, key.length() - "_isStable".length());
+                editorSpendingData.remove(name + "_sum").apply();
+                editorSpendingData.remove(name + "_isStable").apply();
+                editorSpendingData.remove(name + "_date").apply();
+                SpendingPage.updateData();
+            }
         }
     }
     public static int GetAmountIncome() {
