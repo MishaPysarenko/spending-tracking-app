@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/buttonToHome"
+        android:icon="@drawable/baseline_home_24"/>
+
     <item
         android:title="Calendar"
         android:id="@+id/button3"
         android:icon="@drawable/baseline_calendar_month_24"/>
+
+    <item
+        android:title="Skip"
+        android:id="@+id/buttonToSkip"
+        />
 
     <item
         android:title="Add"
