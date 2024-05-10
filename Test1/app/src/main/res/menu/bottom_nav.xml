@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--
-    <item android:title="Calendar"
+    <item
+        android:title="Calendar"
         android:id="@+id/button3"
-        android:onClick="onButton3Click"
         android:icon="@drawable/baseline_calendar_month_24"/>
 
-    <item android:title="Add"
+    <item
+        android:title="Add"
         android:id="@+id/buttonToIncomePage"
-        android:onClick="onButton2Click"
         android:icon="@drawable/baseline_arrow_upward_24"/>
 
-    <item android:title="Remove"
+    <item
+        android:title="Remove"
         android:id="@+id/buttonToSpendingPage"
-        android:onClick="onButtonClick"
         android:icon="@drawable/baseline_arrow_downward_24"/>
-        -->
 </menu>

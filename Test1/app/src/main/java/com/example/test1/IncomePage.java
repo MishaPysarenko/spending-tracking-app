@@ -61,7 +61,7 @@ public class IncomePage extends AppCompatActivity {
         startActivity(MainActivity.AddIncomePage);
     }
     public static void updateData(){
-        adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер
+        //adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер
         SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
     }
 }

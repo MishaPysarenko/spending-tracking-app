@@ -51,60 +51,8 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/openPanelButton"
-            android:layout_width="126dp"
-            android:layout_height="85dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_button_background"
-            android:onClick="onOpenPanelButtonClick"
-            android:text="+"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="HardcodedText,UsingOnClickInXml,TextContrastCheck" />
-
-        <LinearLayout
-            android:id="@+id/panel1"
-            android:layout_width="155dp"
-            android:layout_height="392dp"
-            android:layout_marginBottom="108dp"
-            android:background="@android:color/transparent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="visible">
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="14dp"
-                android:layout_weight="1"
-                android:onClick="onButton3Click"
-                android:text="Календарь Витрат та Доходів"
-                tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
-
-            <Button
-                android:id="@+id/buttonToIncomePage"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_weight="1"
-                android:onClick="onButton2Click"
-                android:text="Записати Доходи"
-                tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
-
-            <Button
-                android:id="@+id/buttonToSpendingPage"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_weight="1"
-                android:onClick="onButtonClick"
-                android:text="Записати Витрати"
-                tools:ignore="HardcodedText,MissingConstraints,UsingOnClickInXml" />
-        </LinearLayout>
-    <!--
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/ButtonNav"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
@@ -113,8 +61,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav"/>
-       -->
+            app:menu="@menu/bottom_nav" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
