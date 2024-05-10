@@ -13,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,6 +24,7 @@ public class SpendingPage extends AppCompatActivity {
     private static TextView SumSpending;
     private RecyclerView recyclerViewForSpending;
     private static MyAdapter adapterForSpending;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,22 @@ public class SpendingPage extends AppCompatActivity {
         SumSpending.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
         goToAddSpending.setOnClickListener(v -> switchToAddSpendingPage());
         goToBackMainMenuFromSpendingPage.setOnClickListener(v -> switchToMainPage());
+
+        bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.button3) {
+                startActivity(MainActivity.CalendarPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToIncomePage) {
+                startActivity(MainActivity.IncomePage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToSpendingPage) {
+                startActivity(MainActivity.SpendingPage);
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
     private void switchToAddSpendingPage() {
         startActivity(MainActivity.AddSpendingPage);

@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -24,6 +26,7 @@ public class IncomePage extends AppCompatActivity {
     private static TextView SumIncome;
     private RecyclerView recyclerViewForIncome;
     private static MyAdapter adapterForIncome;
+    private BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,6 +47,22 @@ public class IncomePage extends AppCompatActivity {
 
         recyclerViewForIncome = findViewById(R.id.ListIncome);
         recyclerViewForIncome.setLayoutManager(new LinearLayoutManager(this));
+
+        bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.button3) {
+                startActivity(MainActivity.CalendarPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToIncomePage) {
+                startActivity(MainActivity.IncomePage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToSpendingPage) {
+                startActivity(MainActivity.SpendingPage);
+                return true;
+            } else {
+                return false;
+            }
+        });
 
         adapterForIncome = new MyAdapter(MemoryMeneger.GetListIncome(), this);
 

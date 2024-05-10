@@ -13,12 +13,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class CalendarPage extends AppCompatActivity {
 
     private Button Back;
     private static MyAdapterForStatistic adapterForStatictic;
     private RecyclerView recyclerViewForStatistic;
-
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,21 @@ public class CalendarPage extends AppCompatActivity {
         recyclerViewForStatistic = findViewById(R.id.ListForStatistic);
         recyclerViewForStatistic.setAdapter(adapterForStatictic);
 
+        bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.button3) {
+                startActivity(MainActivity.CalendarPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToIncomePage) {
+                startActivity(MainActivity.IncomePage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToSpendingPage) {
+                startActivity(MainActivity.SpendingPage);
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
     public static void updateData()
     {
