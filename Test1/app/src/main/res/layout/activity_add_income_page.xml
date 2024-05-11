@@ -22,7 +22,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
-            android:background="@color/background">
+            android:background="@color/background"
+            android:gravity="center">
 
             <EditText
                 android:id="@+id/editTextAmount"
