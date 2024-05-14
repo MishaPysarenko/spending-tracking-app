@@ -2,8 +2,6 @@ package com.example.test1;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +21,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Calendar;
 
 public class CalendarPage extends AppCompatActivity {
-
     private Button Back;
-
-    private static MyAdapterForStatistic adapterForStatictic;
-    //private RecyclerView recyclerViewForStatistic;
     private BottomNavigationView bottomNavigationView;
+    private static TextView textDate;
+    private static TextView textIncome;
+    private static TextView textSpanding;
+    private TextView textSize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,17 +38,16 @@ public class CalendarPage extends AppCompatActivity {
             return insets;
         });
         init();
-
-
     }
-
-    private void init()
-    {
-        adapterForStatictic = new MyAdapterForStatistic(MemoryMeneger.GetListStatistics(),this);
+    private void init() {
+        textDate = findViewById(R.id.Date);
+        textIncome = findViewById(R.id.Income);
+        textSpanding = findViewById(R.id.Spending);
+        textSize = findViewById(R.id.Size);
+        textSize.setText(String.valueOf(MemoryMeneger.GetSizeStatistic()));
 
         Back = findViewById(R.id.Back);
         Back.setOnClickListener(v -> switchToMainPage());
-
 
         Button Сal = findViewById(R.id.pickTime);
         Сal.setOnClickListener(v -> {
@@ -58,11 +55,8 @@ public class CalendarPage extends AppCompatActivity {
             newFragment.show(getSupportFragmentManager(), "datePicker");
         });
 
-
-        //recyclerViewForStatistic = findViewById(R.id.ListForStatistic);
-        //recyclerViewForStatistic.setAdapter(adapterForStatictic);
-
         bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setSelectedItemId(R.id.button3);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.button3) {
                 startActivity(MainActivity.CalendarPage);
@@ -72,6 +66,9 @@ public class CalendarPage extends AppCompatActivity {
                 return true;
             } else if (item.getItemId() == R.id.buttonToSpendingPage) {
                 startActivity(MainActivity.SpendingPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToHome) {
+                startActivity(MainActivity.MainPage);
                 return true;
             } else {
                 return false;
@@ -96,6 +93,13 @@ public class CalendarPage extends AppCompatActivity {
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // тут придумаємо список, куди буде вписуватись дата. потім використовувати
+            // Сохраняем выбранную дату в переменные
+            String selectedDate = String.format("%02d.%02d.%04d", day, month + 1, year); // Форматируем дату в строку
+            // Теперь вы можете использовать эту дату, например, установить ее в TextView
+            DataItemForStatistic temp = MemoryMeneger.GetStatistics(selectedDate);
+            textIncome.setText(temp.getSumIncome());
+            textSpanding.setText(temp.getSumSpending());
+            textDate.setText(selectedDate);
         }
     }
 

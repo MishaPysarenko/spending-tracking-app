@@ -37,40 +37,9 @@ public class MainActivity extends AppCompatActivity {
         AddIncomePage = new Intent(this, AddIncomePage.class);
         CalendarPage = new Intent(this, CalendarPage.class);
 
-        update();
         switchToMainPage();
     }
     private void switchToMainPage() {
         startActivity(MainPage);
     }
-
-    private void update() {
-        // Получаем предыдущую дату обновления из SharedPreferences
-        long previousUpdateMillis = lastDateUpdate.getLong("lastUpdateMillis", 0);
-        Calendar previousUpdateCalendar = Calendar.getInstance();
-        previousUpdateCalendar.setTimeInMillis(previousUpdateMillis);
-
-        // Получаем текущую дату
-        Calendar currentCalendar = Calendar.getInstance();
-
-        // Проверяем, изменилась ли дата с предыдущего обновления
-        if (currentCalendar.get(Calendar.DAY_OF_YEAR) != previousUpdateCalendar.get(Calendar.DAY_OF_YEAR) ||
-                currentCalendar.get(Calendar.YEAR) != previousUpdateCalendar.get(Calendar.YEAR)) {
-            // Дата изменилась, выполняем другой алгоритм обновления
-            // Здесь можно добавить код для обновления данных
-            // Например, загрузка новых данных из сети или базы данных
-            // После обновления данных нужно сохранить текущую дату обновления в SharedPreferences
-
-            int tempIncome = MemoryMeneger.GetAmountIncome();
-            int tempSpending = MemoryMeneger.GetAmountSpending();
-
-            MemoryMeneger.AddToStatisticsList(new DataItem(String.valueOf(tempIncome),String.valueOf(tempSpending),
-                    String.valueOf(currentCalendar.get(Calendar.DATE) + "."+ (currentCalendar.get(Calendar.MONTH) + 1) + "."+ currentCalendar.get(Calendar.YEAR)),
-                    false));
-
-            lastDateUpdateEditor.putLong("lastUpdateMillis", currentCalendar.getTimeInMillis()).apply();
-            MemoryMeneger.deleteFalseItems();
-        }
-    }
-
 }

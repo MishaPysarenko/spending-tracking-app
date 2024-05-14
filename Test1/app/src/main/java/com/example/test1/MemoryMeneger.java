@@ -20,7 +20,7 @@ public class MemoryMeneger {
     private static Context mContext; // Добавляем поле для хранения контекста
     private static List<DataItem> dataListIncome;
     private static List<DataItem> dataListSpending;
-    private static List<DataItem> dataListStatistics;
+    private static List<DataItemForStatistic> dataListStatistics;
 
     public static void AddDebugDATA() {
         DataItem temp1 = new DataItem("500","Параш лента","03.05.2024",true);
@@ -34,27 +34,35 @@ public class MemoryMeneger {
         DataItem temp5 = new DataItem("400","Шавуха","03.05.2024",false);
         dataListSpending.add(temp5);
 
-        DataItem temp6 = new DataItem("600","Нашел на улице","03.05.2024",true);
-        dataListStatistics.add(temp6);
-        DataItem temp7 = new DataItem("360","у друга спиздил","03.05.2024",false);
-        dataListStatistics.add(temp7);
-        DataItem temp8 = new DataItem("750","Отдал вино","03.05.2024",false);
-        dataListStatistics.add(temp8);
-        DataItem temp9 = new DataItem("1500","ЗП","03.05.2024",true);
-        dataListStatistics.add(temp9);
-        DataItem temp10 = new DataItem("400","Шавуха оказалась просроченой","03.05.2024",false);
-        dataListStatistics.add(temp10);
+        DataItem temp6 = new DataItem("500","Параш лента","03.05.2024",true);
+        dataListIncome.add(temp6);
+        DataItem temp7 = new DataItem("360","Жижка","03.05.2024",false);
+        dataListIncome.add(temp7);
+        DataItem temp8 = new DataItem("750","Винцо","03.05.2024",true);
+        dataListIncome.add(temp8);
+        DataItem temp9 = new DataItem("1500","Я хуй знает","03.05.2024",false);
+        dataListIncome.add(temp9);
+        DataItem temp10 = new DataItem("400","Шавуха","03.05.2024",false);
+        dataListIncome.add(temp10);
 
-        DataItem temp11 = new DataItem("600","Нашел на улице","03.05.2024",true);
-        dataListStatistics.add(temp6);
-        DataItem temp12 = new DataItem("360","у друга спиздил","03.05.2024",false);
-        dataListStatistics.add(temp7);
-        DataItem temp13 = new DataItem("750","Отдал вино","03.05.2024",false);
-        dataListStatistics.add(temp8);
-        DataItem temp14 = new DataItem("1500","ЗП","03.05.2024",true);
-        dataListStatistics.add(temp9);
-        DataItem temp15 = new DataItem("400","Шавуха оказалась просроченой","03.05.2024",false);
-        dataListStatistics.add(temp10);
+        dataListStatistics.add(new DataItemForStatistic("500","1000","28.04.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","29.04.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","30.04.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","01.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","02.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","03.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","04.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","05.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","06.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","07.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","08.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","09.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","10.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","11.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","12.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","13.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","14.05.2024"));
+        dataListStatistics.add(new DataItemForStatistic("500","1000","15.05.2024"));
     }
     private MemoryMeneger() {
 
@@ -75,7 +83,6 @@ public class MemoryMeneger {
 
         dataListIncome = getIncome();
         dataListSpending = getSpending();
-
         dataListStatistics = getStatistic();
 
         if (dataListIncome == null)
@@ -96,9 +103,9 @@ public class MemoryMeneger {
         dataListSpending.add(temp);
         saveSpending(temp);
     }
-    public static void AddToStatisticsList(DataItem temp) {
+    public static void AddToStatisticsList(DataItemForStatistic temp) {
         dataListStatistics.add(temp);
-        saveIncome(temp);
+        saveStatistics(temp);
     }
     private static void saveIncome(DataItem income) {
         String name = income.getName();
@@ -114,16 +121,24 @@ public class MemoryMeneger {
         editorSpendingData.putString(name + "_date", spending.getDate());
         editorSpendingData.apply();
     }
-    private static void saveStatistics(DataItem income) {
-        String name = income.getName();
-        editorStatistics.putInt(name + "_sum", Integer.parseInt(income.getSum()));
-        editorStatistics.putBoolean(name + "_isStable", income.getIsStable());
-        editorStatistics.putString(name + "_date", income.getDate());
+    private static void saveStatistics(DataItemForStatistic statistic) {
+        String name = statistic.getName();
+        editorStatistics.putInt(name + "_sumIncome", Integer.parseInt(statistic.getSumIncome()));
+        editorStatistics.putString(name + "_sumSpending", statistic.getSumSpending());
         editorStatistics.apply();
     }
-    public static List<DataItem> GetListStatistics(){
-        List<DataItem> incomeList = dataListStatistics;
-        return incomeList;
+    public static DataItemForStatistic GetStatistics(String date){
+        // Сначала попробуем найти в списке dataListStatistics
+        for (DataItemForStatistic item : dataListStatistics) {
+            if (item.getName().equals(date)) {
+                return item;
+            }
+        }
+        // Получаем сохраненные данные из SharedPreferences
+        int sumIncome = Statistics.getInt(date + "_sumIncome", -1);
+        String sumSpending = Statistics.getString(date + "_sumSpending", "Не знайдено");
+        DataItemForStatistic dataItem = new DataItemForStatistic(String.valueOf(sumIncome), sumSpending, date);
+        return dataItem;
     }
     public static List<DataItem> GetListIncome(){
         List<DataItem> incomeList = dataListIncome;
@@ -131,21 +146,6 @@ public class MemoryMeneger {
     }
     public static List<DataItem> GetListSpending(){
         List<DataItem> incomeList = dataListSpending;
-        return incomeList;
-    }
-    private static List<DataItem> getStatistic() {
-        List<DataItem> incomeList = new ArrayList<>();
-        Map<String, ?> incomeEntries = Statistics.getAll();
-        for (Map.Entry<String, ?> entry : incomeEntries.entrySet()) {
-            String name = entry.getKey();
-            if (name.endsWith("_sum")) {
-                String itemName = name.replace("_sum", "");
-                int sum = Statistics.getInt(name, 0); // Значение по умолчанию 0
-                boolean isStable = Statistics.getBoolean(itemName + "_isStable", false);
-                String date = Statistics.getString(itemName + "_date", "");
-                incomeList.add(new DataItem(String.valueOf(sum), itemName, date, isStable));
-            }
-        }
         return incomeList;
     }
     private static List<DataItem> getSpending() {
@@ -178,6 +178,17 @@ public class MemoryMeneger {
         }
         return incomeList;
     }
+    private static List<DataItemForStatistic> getStatistic() {
+        List<DataItemForStatistic> incomeList = new ArrayList<>();
+        Map<String, ?> incomeEntries = Statistics.getAll();
+        for (Map.Entry<String, ?> entry : incomeEntries.entrySet()) {
+            String name = entry.getKey();
+            int sumIncome = Statistics.getInt(name + "_sumIncome", -1);
+            String sumSpending = Statistics.getString(name + "_sumSpending", "");
+            incomeList.add(new DataItemForStatistic(String.valueOf(sumIncome), sumSpending, name));
+        }
+        return incomeList;
+    }
     public static void delete(String name) {
         if(IncomeData.getString(name,null)!=null)
         {
@@ -193,14 +204,6 @@ public class MemoryMeneger {
             editorSpendingData.remove(name + "_sum").apply();
             editorSpendingData.remove(name + "_isStable").apply();
             editorSpendingData.remove(name + "_date").apply();
-            SpendingPage.updateData();
-        }
-        if(Statistics.getString(name,null)!=null)
-        {
-            // Удаляем данные для трат
-            editorStatistics.remove(name + "_sum").apply();
-            editorStatistics.remove(name + "_isStable").apply();
-            editorStatistics.remove(name + "_date").apply();
             SpendingPage.updateData();
         }
     }
@@ -266,5 +269,8 @@ public class MemoryMeneger {
             }
         }
         return res;
+    }
+    public static int GetSizeStatistic(){
+        return dataListStatistics.size();
     }
 }

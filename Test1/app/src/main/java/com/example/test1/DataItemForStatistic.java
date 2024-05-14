@@ -1,15 +1,26 @@
 package com.example.test1;
 
 public class DataItemForStatistic {
-    private String sumIncome;
-    private String sumSpending;
-    private String date;
-    public DataItemForStatistic(String sumIncome, String sumSpending, String date) {
-        this.sumIncome = sumIncome;
-        this.sumSpending = sumSpending;
-        this.date = date;
+    private String Date;
+    private String SumIncome;
+    private String SumSpending;
+
+    DataItemForStatistic(String SumIncome, String SumSpending, String Date) {
+        this.Date = Date;
+        this.SumIncome = SumIncome;
+        this.SumSpending = SumSpending;
     }
-    public String getSum() {return sumIncome;}
-    public String getName() {return sumSpending;}
-    public String getDate(){return date;}
+
+    public String getName()
+    {
+        return Date;
+    }
+    public String getSumIncome()
+    {
+        return SumIncome;
+    }
+    public String getSumSpending()
+    {
+        return SumSpending;
+    }
 }

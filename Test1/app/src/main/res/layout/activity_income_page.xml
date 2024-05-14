@@ -48,32 +48,6 @@
             tools:ignore="HardcodedText,MissingConstraints"
             tools:layout_editor_absoluteY="137dp" />
 
-        <Button
-            android:id="@+id/AddIncome"
-            android:layout_width="90dp"
-            android:layout_height="99dp"
-            android:layout_marginStart="320dp"
-            android:layout_marginBottom="10dp"
-            android:text="Додати Прибуток"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/buttonTobackMainPageInIncome"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/buttonTobackMainPageInIncome"
-            android:layout_width="90dp"
-            android:layout_height="91dp"
-            android:layout_marginBottom="4dp"
-            android:text="Назад"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/ButtonNav"
             android:layout_width="0dp"

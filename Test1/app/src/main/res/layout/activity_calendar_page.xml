@@ -13,7 +13,18 @@
         android:layout_height="match_parent"
         android:background="@color/background"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="16dp">
+
+        <TextView
+            android:id="@+id/Size"
+            android:layout_width="81dp"
+            android:layout_height="45dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Income"
+            app:layout_constraintVertical_bias="0.262"
+            tools:layout_editor_absoluteX="165dp"
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/Back"
@@ -29,59 +40,64 @@
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/pickTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
             android:text="Вибрати дату"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Сюди буде внесено дату. А може і не сюди.
-        Іди нахуй звідси, чєл..."
-            android:textSize="20sp"
-            android:textColor="@android:color/background_dark"
             app:layout_constraintTop_toBottomOf="@+id/Back"
-            tools:layout_editor_absoluteX="0dp">
-
-        </TextView>
+            tools:ignore="MissingConstraints" />
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@android:color/background_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@android:color/background_dark"
-            app:layout_constraintTop_toBottomOf="@+id/pickTime" />
+            app:layout_constraintTop_toBottomOf="@+id/pickTime"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:text="А тут може бути можливість виведення даних з дати. Правда, це не відміняє того, що ти маєш піти нахуй. Єбланоїд 🔥"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/calendarView"
-            tools:layout_editor_absoluteX="0dp"
-            android:textColor="@android:color/background_dark">
+            android:id="@+id/Date"
+            android:layout_width="85dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
-        </TextView>
+        <TextView
+            android:id="@+id/Income"
+            android:layout_width="98dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="60dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/Date"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+        <TextView
+            android:id="@+id/Spending"
+            android:layout_width="95dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="60dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Income"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

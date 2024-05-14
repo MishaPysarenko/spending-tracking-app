@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SpendingPage extends AppCompatActivity {
-    private Calendar calendar;
     private static TextView SumSpending;
     private RecyclerView recyclerViewForSpending;
     private static MyAdapter adapterForSpending;
@@ -39,20 +38,14 @@ public class SpendingPage extends AppCompatActivity {
 
         recyclerViewForSpending = findViewById(R.id.ListSpending);
         recyclerViewForSpending.setLayoutManager(new LinearLayoutManager(this));
-
         adapterForSpending = new MyAdapter(MemoryMeneger.GetListSpending(), this);
-
         recyclerViewForSpending.setAdapter(adapterForSpending);
 
-        Button goToBackMainMenuFromSpendingPage = findViewById(R.id.buttonToBackMainPageInSpending);
-        Button goToAddSpending = findViewById(R.id.AddSpending);
         SumSpending = findViewById(R.id.SumSpending);
-
         SumSpending.setText(String.valueOf(MemoryMeneger.GetAmountSpending()));
-        goToAddSpending.setOnClickListener(v -> switchToAddSpendingPage());
-        goToBackMainMenuFromSpendingPage.setOnClickListener(v -> switchToMainPage());
 
         bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setSelectedItemId(R.id.buttonToSpendingPage);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.button3) {
                 startActivity(MainActivity.CalendarPage);
@@ -61,18 +54,15 @@ public class SpendingPage extends AppCompatActivity {
                 startActivity(MainActivity.IncomePage);
                 return true;
             } else if (item.getItemId() == R.id.buttonToSpendingPage) {
-                startActivity(MainActivity.SpendingPage);
+                startActivity(MainActivity.AddSpendingPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToHome) {
+                startActivity(MainActivity.MainPage);
                 return true;
             } else {
                 return false;
             }
         });
-    }
-    private void switchToAddSpendingPage() {
-        startActivity(MainActivity.AddSpendingPage);
-    }
-    private void switchToMainPage() {
-        startActivity(MainActivity.MainPage);
     }
     public static void updateData(){
         adapterForSpending.notifyDataSetChanged(); // Обновляем адаптер

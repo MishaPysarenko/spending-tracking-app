@@ -43,15 +43,21 @@ public class MainPageAtciviti extends AppCompatActivity {
         Speding = findViewById(R.id.expensesTextView);
 
         bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setSelectedItemId(R.id.MainPage);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.button3) {
+                //bottomNavigationView.setSelectedItemId(R.id.button3);
                 startActivity(MainActivity.CalendarPage);
                 return true;
             } else if (item.getItemId() == R.id.buttonToIncomePage) {
+                //bottomNavigationView.setSelectedItemId(R.id.buttonToIncomePage);
                 startActivity(MainActivity.IncomePage);
                 return true;
             } else if (item.getItemId() == R.id.buttonToSpendingPage) {
                 startActivity(MainActivity.SpendingPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToHome) {
+                startActivity(MainActivity.MainPage);
                 return true;
             } else {
                 return false;

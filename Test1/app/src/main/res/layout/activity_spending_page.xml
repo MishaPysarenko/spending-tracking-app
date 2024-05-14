@@ -21,7 +21,6 @@
             android:layout_height="468dp"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="75dp"
-            app:layout_constraintBottom_toTopOf="@+id/DelSpending"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text8"
@@ -44,35 +43,6 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText,MissingConstraints,TextSizeCheck"
             tools:layout_editor_absoluteY="137dp" />
-
-        <Button
-            android:id="@+id/DelSpending"
-            android:layout_width="116dp"
-            android:layout_height="102dp"
-            android:layout_marginStart="180dp"
-            android:text="Видалити Витрати"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonToBackMainPageInSpending"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/AddSpending"
-            android:layout_width="108dp"
-            android:layout_height="105dp"
-            android:text="Додати Витрати"
-            app:layout_constraintBottom_toTopOf="@+id/buttonToBackMainPageInSpending"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/buttonToBackMainPageInSpending"
-            android:layout_width="93dp"
-            android:layout_height="94dp"
-            android:text="Назад"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

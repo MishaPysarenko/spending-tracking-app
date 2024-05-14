@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class IncomePage extends AppCompatActivity {
-    private Calendar calendar;
     private static TextView SumIncome;
     private RecyclerView recyclerViewForIncome;
     private static MyAdapter adapterForIncome;
@@ -39,48 +38,36 @@ public class IncomePage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        SumIncome = findViewById(R.id.SumIncome);
-        Button goToBackMainMenuFromIncomePage = findViewById(R.id.buttonTobackMainPageInIncome);
-        Button goToAddIncome = findViewById(R.id.AddIncome);
-
-        calendar = Calendar.getInstance();
-
         recyclerViewForIncome = findViewById(R.id.ListIncome);
         recyclerViewForIncome.setLayoutManager(new LinearLayoutManager(this));
+        adapterForIncome = new MyAdapter(MemoryMeneger.GetListIncome(), this);
+        recyclerViewForIncome.setAdapter(adapterForIncome);
+
+        SumIncome = findViewById(R.id.SumIncome);
+        SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
 
         bottomNavigationView = findViewById(R.id.ButtonNav);
+        bottomNavigationView.setSelectedItemId(R.id.buttonToIncomePage);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.button3) {
                 startActivity(MainActivity.CalendarPage);
                 return true;
             } else if (item.getItemId() == R.id.buttonToIncomePage) {
-                startActivity(MainActivity.IncomePage);
+                startActivity(MainActivity.AddIncomePage);
                 return true;
             } else if (item.getItemId() == R.id.buttonToSpendingPage) {
                 startActivity(MainActivity.SpendingPage);
+                return true;
+            } else if (item.getItemId() == R.id.buttonToHome) {
+                startActivity(MainActivity.MainPage);
                 return true;
             } else {
                 return false;
             }
         });
-
-        adapterForIncome = new MyAdapter(MemoryMeneger.GetListIncome(), this);
-
-        recyclerViewForIncome.setAdapter(adapterForIncome);
-
-        goToAddIncome.setOnClickListener(v -> switchToAddIncomePage());
-        goToBackMainMenuFromIncomePage.setOnClickListener(v -> switchToMainPage());
-        SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
-    }
-    private void switchToMainPage() {
-        startActivity(MainActivity.MainPage);
-    }
-    private void switchToAddIncomePage()
-    {
-        startActivity(MainActivity.AddIncomePage);
     }
     public static void updateData(){
-        //adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер
+        adapterForIncome.notifyDataSetChanged(); // Обновляем адаптер
         SumIncome.setText(String.valueOf(MemoryMeneger.GetAmountIncome()));
     }
 }
